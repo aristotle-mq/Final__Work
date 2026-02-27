@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ title }}</title>
+</head>
+<body>
+    <form action="" method="post">
+        {{ form.csrf_token }}
+        {% for row in form if row.name != "csrf_token" %}
+        <p>
+            {% if "Зарегистрироваться" not in row.label() %}
+                {{ row.label() }}
+            {% endif %}
+            {{ row }}
+        </p>
+        {% endfor %}
+    </form>
+</body>
+</html>

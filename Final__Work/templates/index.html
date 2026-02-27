@@ -4,29 +4,46 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="style.css" />
-		<title>Final__Work</title>
+		<link rel="stylesheet" href="../static/index_style.css" />
+		<title>{{ title }}</title>
 	</head>
 	<body>
 		<header class="header container">
 			<nav class="navigation">
 				<div class="Logo_and_Menu">
-          <a href="#"><img class="Logotype_header" src="./img/Verhniy_logo.png" alt="Main_Simvol" /></a>
+          <a href="#"><img class="Logotype_header" src="../static/img/Verhniy_logo.png" alt="Main_Simvol" /></a>
 
 					<div class="Menu_navigation">
 						<a href="#">Products</a>
 						<a href="#">Pricing</a>
 						<a href="#">FAQ</a>
 						<a href="#">Blog</a>
-						<a href="#">Blog</a>
+						<a href="#"></a>
 					</div>
 				</div>
 
 				<div class="Avtorizaciay_navigation">
-					<a href="#">Sign&nbsp;in</a>
-					<button class="Button_Sing_Up">Sign&nbsp;Up</button>
-				</div>
+					<button id="openLoginModal" class="sign_in">Sign&nbsp;In</button>
+					<a href="#section1" class="sign_up scroll-btn" onclick="smoothScroll('#section1'); return false;">Sign Up</a>
+                </div>
 			</nav>
+
+            <!-- Модальное окно -->
+            <div id="loginModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h3>Sign In</h3>
+                    <form action="" class="form__authorization" method="post">
+                        {{ form_auth.csrf_token }}
+                        {% for row in form_auth if row.name != "csrf_token" and row.name != "submit_auth" %}
+                            <p>
+                                {{ row(class="form__input", placeholder=row.label.text) }}
+                            </p>
+                        {% endfor %}
+                        {{ form_auth.submit_auth(class="form__auth-btn") }}
+                    </form>
+                </div>
+            </div>
 
 			<div class="TBD_header">
 				<div class="Text_and_button_header">
@@ -40,8 +57,8 @@
 				</div>
 
 				<div>
-					<img class="Diagram_header" src="./img/Main_Diagramm.png" alt="" />
-					<img class="Diagram_header_hidden" src="./img/main-screen__smal.svg" alt="" />
+					<img class="Diagram_header" src="../static/img/Main_Diagramm.png" alt="" />
+					<img class="Diagram_header_hidden" src="../static/img/main-screen__smal.svg" alt="" />
 				</div>
 			</div>
 		</header>
@@ -55,7 +72,7 @@
 
 				<div class="MWP_Picture">
 					<div class="Feature_1">
-						<img class="Feature_1_Img" src="./img/Monitoring_Clock.png" alt="" />
+						<img class="Feature_1_Img" src="../static/img/Monitoring_Clock.png" alt="" />
 						  <div class="Feature_1__text">
 						    <h6>Monitoring 24/7</h6>
   							<p class="Feature_p_1">Lorem ipsum dolor sit amet, consectetur adipis cing elit.Elementum nisi aliquet volutpat.</p>
@@ -63,7 +80,7 @@
 					</div>
 
 					<div class="Feature_2">
-						<img class="Feature_2_Img" src="./img/Widget_system.png" alt="" />
+						<img class="Feature_2_Img" src="../static/img/Widget_system.png" alt="" />
 						 <div class="Feature_2__text">
 						    <h6>Widget System</h6>
   							<p class="Feature_p_2">Sapien in etiam vitae nibh nunc mattis imperdiet sed nullam.Vitae et, tortor pulvinar risus pulvinar.</p>
@@ -71,7 +88,7 @@
 					</div>
 
 					<div class="Feature_3">
-						<img class="Feature_3_Img" src="./img/Best_perfomance.png" alt="" />
+						<img class="Feature_3_Img" src="../static/img/Best_perfomance.png" alt="" />
 						  <div class="Feature_3__text">
 						    <h6>Best&nbsp;Performance</h6>
   							<p class="Feature_p_3">Lorem ipsum dolor sit amet, consectetur&nbsp;adipis cing elit.Elementum nisi aliquet&nbsp;volutpat.</p>
@@ -91,7 +108,7 @@
 							</p>
 						</div>
 						<div class="Img_diogramm_1">
-							<img class="container_img_diogramm1" src="./img/Diogram_1.png" alt="" />
+							<img class="container_img_diogramm1" src="../static/img/Diogram_1.png" alt="" />
 						</div>
 					</div>
 
@@ -106,7 +123,7 @@
 							</p>
 						</div>
 						<div class="Img_diogramm_2">
-							<img class="container_img_diogramm2" src="./img/Diogram_2.png" alt="" />
+							<img class="container_img_diogramm2" src="../static/img/Diogram_2.png" alt="" />
 						</div>
 					</div>
 
@@ -121,7 +138,7 @@
 							</p>
 						</div>
 						<div class="Img_diogramm_3">
-							<img class="container_img_diogramm3" src="./img/Diogram_3.png" alt="" />
+							<img class="container_img_diogramm3" src="../static/img/Diogram_3.png" alt="" />
 						</div>
 					</div>
 				</div>
@@ -225,35 +242,16 @@
 				</div>
 				<div class="companies__column">
 					<div class="companies__column-inner">
-						<h3 class="companies__column-title">Sign Up</h3>
-						<form class="form__authorization">
-							<button
-								class="form__auth-btn"
-								type="submit"
-								name="form__auth-submit"
-							>
-								Start your free trial
-							</button>
-							<input
-								class="form__auth"
-								type="email"
-								name="form__auth-email"
-								placeholder="Your primary email"
-							/>
-							<input
-								class="form__auth"
-								id="password1"
-								type="password"
-								name="form__auth-pass"
-								placeholder="Password"
-							/>
-							<input
-								class="form__auth"
-								id="password2"
-								type="password"
-								name="form__auth-pass"
-								placeholder="Re-type Password"
-							/>
+						<h3 id="section1" class="companies__column-title">Sign Up</h3>
+						<form class="form__authorization" action="" method="post">
+                            {{ form_reg.submit_reg(class="form__auth-btn") }}
+                            {{ form_reg.csrf_token }}
+                            {% for row in form_reg if row.name != "csrf_token" and row.name != "submit_reg" %}
+                                <p>
+                                    <!--{{ row.label(class="form__label") }}-->
+                                    {{ row(class="form__input", placeholder=row.label.text) }}
+                                </p>
+                            {% endfor %}
 						</form>
 						<div class="companies__stars">
 							<h4 class="companies__stars-title">Help us get better</h4>
@@ -282,7 +280,7 @@
 			<div class="container">
 				<div class="footer__row">
 					<a class="logo" href="">
-						<img src="./img/logo__footer.svg" alt="footer-logo" />
+						<img src="../static/img/logo__footer.svg" alt="footer-logo" />
 					</a>
 					<nav class="footer__menu">
 						<ul class="footer__menu-list">
@@ -347,5 +345,5 @@
 			</div>
 		</div>
 	</body>
-	<script src="./script.js"></script>
+	<script src="../static/script.js"></script>
 </html>
